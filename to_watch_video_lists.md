@@ -32,7 +32,12 @@
 - [What is Agentic AI and How Does it Work?](https://www.youtube.com/watch?v=15_pppse4fY)
 - [What is A2A (Agent to Agent Protocol)? | A2A Explained](https://www.youtube.com/watch?v=Sl9EZpE61xA)
 - [Generative AI Vs Agentic AI Vs AI Agents](https://www.youtube.com/watch?v=p4pHsuEf4Ms)
-
+- [An Introduction to AI Agents (for 2025)](https://www.youtube.com/watch?v=ZaY5_ScmiFE&t=2s)
+- [LLM Workflows: From Automation to AI Agents (with Python)](https://www.youtube.com/watch?v=Nm_mmRTpWLg)
+- [LLM in a Loop: Automate feedback with evals](https://www.youtube.com/watch?v=6VcXukJuGA0)
+- [How to Improve LLMs with Tools (ft. OpenAI Agents SDK)](https://www.youtube.com/watch?v=-BUs1CPHKfU&list=PLz-ep5RbHosU02OKABBkbsQrYWmQfoZMH&index=2)
+- [How to Build a Notion AI Agent (in 18 minutes)](https://www.youtube.com/watch?v=lS33W56-NGc&list=PLz-ep5RbHosU02OKABBkbsQrYWmQfoZMH&index=6)
+- [How to Build Your 1st MCP Server with Python (AgentCon Dallas - 2025)](https://www.youtube.com/watch?v=U9XDqQmV1Hc)
 
 
 ## N8N 
