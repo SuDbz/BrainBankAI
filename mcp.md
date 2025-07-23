@@ -23,6 +23,8 @@
     - [MCP vs. Function Calling](#mcp-vs-function-calling)
     - [Challenges and Limitations](#challenges-and-limitations)
     - [Future Vision and Opportunities](#future-vision-and-opportunities)
+- [Other Links](#other-links)    
+    - [mcp-overview](https://github.com/microsoft/mcp-for-beginners?tab=readme-ov-file#-mcp-curriculum-overview)
 
 ## Introduction
 
