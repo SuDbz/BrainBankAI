@@ -26,6 +26,7 @@
 - [Other Links](#other-links)    
     - [mcp-overview](https://github.com/microsoft/mcp-for-beginners?tab=readme-ov-file#-mcp-curriculum-overview)
     - [quick-mcp-example](https://github.com/ALucek/quick-mcp-example)
+    - [mcp-with-python](https://www.youtube.com/watch?v=N3vHJcHBS-w)
 
 ## Introduction
 
