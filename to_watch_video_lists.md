@@ -12,6 +12,7 @@
 
 
 ## MCP 
+- [java/mcp-server official doc](https://modelcontextprotocol.io/sdk/java/mcp-server#stdio)
 - [The Ultimate MCP Crash Course - Build From Scratch](https://www.youtube.com/watch?v=ZoZxQwp1PiM)
 - [Model Context Protocol (MCP), clearly explained (why it matters)](https://www.youtube.com/watch?v=7j_NE6Pjv-E)
 - [Why MCP really is a big deal | Model Context Protocol with Tim Berglund](https://www.youtube.com/watch?v=FLpS7OfD5-s)
