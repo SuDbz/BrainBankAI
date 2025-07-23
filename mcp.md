@@ -25,6 +25,7 @@
     - [Future Vision and Opportunities](#future-vision-and-opportunities)
 - [Other Links](#other-links)    
     - [mcp-overview](https://github.com/microsoft/mcp-for-beginners?tab=readme-ov-file#-mcp-curriculum-overview)
+    - [quick-mcp-example](https://github.com/ALucek/quick-mcp-example)
 
 ## Introduction
 
