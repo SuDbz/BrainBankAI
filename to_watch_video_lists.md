@@ -18,7 +18,10 @@
 - [Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!](https://www.youtube.com/watch?v=E2DEHOEbzks)
 - [MCPs Explained for Beginners: AI Flight Booking Demo!](https://www.youtube.com/watch?v=E2DEHOEbzks)
 - [MCP Tutorial: Build Your First MCP Server](https://www.youtube.com/watch?v=jLM6n4mdRuA)
-- 
+- [MCP Tutorial: Build Your First MCP Server and Client from Scratch (Free Labs)](https://www.youtube.com/watch?v=RhTiAOGwbYE)
+- [How to Set Up a Model Context Protocol Server! MCP Server Set Up Guide!](https://www.youtube.com/watch?v=ccXf7jXbIUw)
+- [How to Build Your 1st MCP Server with Python (AgentCon Dallas - 2025)](https://www.youtube.com/watch?v=U9XDqQmV1Hc)
+
 
 
 ## Agents and Agentic AI
@@ -37,7 +40,6 @@
 - [LLM in a Loop: Automate feedback with evals](https://www.youtube.com/watch?v=6VcXukJuGA0)
 - [How to Improve LLMs with Tools (ft. OpenAI Agents SDK)](https://www.youtube.com/watch?v=-BUs1CPHKfU&list=PLz-ep5RbHosU02OKABBkbsQrYWmQfoZMH&index=2)
 - [How to Build a Notion AI Agent (in 18 minutes)](https://www.youtube.com/watch?v=lS33W56-NGc&list=PLz-ep5RbHosU02OKABBkbsQrYWmQfoZMH&index=6)
-- [How to Build Your 1st MCP Server with Python (AgentCon Dallas - 2025)](https://www.youtube.com/watch?v=U9XDqQmV1Hc)
 
 
 ## N8N 
