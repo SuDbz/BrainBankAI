@@ -112,6 +112,7 @@ def home():
     }
 
 
+#what it means is that, it iternally do app.run(transport="streamable-http")
 mcp = FastApiMCP(app)
 mcp.mount()
 
