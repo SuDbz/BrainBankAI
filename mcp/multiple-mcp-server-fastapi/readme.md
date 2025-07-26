@@ -172,69 +172,6 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000
 ```
 
-## 🛠️ API Usage Examples
-
-### **1. Explore Available Endpoints**
-```bash
-# Get overview of all servers and tools
-curl http://localhost:8000/
-
-# Response:
-{
-  "message": "Multiple MCP Server FastAPI Gateway",
-  "servers": {
-    "greet": {
-      "path": "/greet",
-      "description": "Greeting MCP server with tools for saying hello",
-      "tools": ["echoHai"],
-      "example_url": "POST /greet/tools/echoHai"
-    },
-    "bye": {
-      "path": "/bye",
-      "description": "Farewell MCP server with tools for saying goodbye", 
-      "tools": ["echoBye"],
-      "example_url": "POST /bye/tools/echoBye"
-    }
-  }
-}
-```
-
-### **2. Use Greeting Tools**
-```bash
-# Call the echoHai tool
-curl -X POST http://localhost:8000/greet/tools/echoHai \
-  -H "Content-Type: application/json" \
-  -d '{"userName": "Alice"}'
-
-# Response:
-{
-  "content": [
-    {
-      "type": "text",
-      "text": "Hello, Alice!"
-    }
-  ]
-}
-```
-
-### **3. Use Farewell Tools**
-```bash
-# Call the echoBye tool
-curl -X POST http://localhost:8000/bye/tools/echoBye \
-  -H "Content-Type: application/json" \
-  -d '{"userName": "Bob"}'
-
-# Response:
-{
-  "content": [
-    {
-      "type": "text", 
-      "text": "Bye, Bob!"
-    }
-  ]
-}
-```
-
 ### **4. Interactive API Documentation**
 
 Visit these URLs in your browser for interactive API exploration:
