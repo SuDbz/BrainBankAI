@@ -31,6 +31,7 @@
     - [Build Your Own MCP Server in Under 15 Minutes | Spring AI Tutorial](https://www.youtube.com/watch?v=w5YVHG1j3Co)
     - [Writing Your Own MCP Server With Java](https://www.youtube.com/watch?v=aOIO79Z1sUc)
     - [MCP Server with python + VS](https://www.youtube.com/watch?v=iS25RFups4A)
+    - [MCP Server + Rest + python + VS](https://www.youtube.com/watch?v=2hwrxAbw-9Y)
 
 ## Introduction
 
