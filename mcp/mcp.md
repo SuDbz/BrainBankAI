@@ -41,6 +41,8 @@
     - [Stdio MCP](/mcp/mcp-stdio/)
         - [Server](/mcp/mcp-stdio/server/)
         - [Client](/mcp/mcp-stdio/client/)  
+    - [MCP proxy server](/mcp/multiple-mcp-server-fastapi/)
+        - [Server](/mcp/multiple-mcp-server-fastapi/)   
 
 
 
