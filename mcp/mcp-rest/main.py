@@ -113,6 +113,23 @@ def home():
 
 
 #what it means is that, it iternally do app.run(transport="streamable-http")
+"""
+A simple example with FasteMCP
+
+from mcp.server.fastmcp import FastMCP
+
+mcp=FastMCP("weather")
+
+@mcp.tool()
+async def get_weather(location:str)->str:
+    #get the weather info
+    return "its always raining"
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")
+
+"""
+
 mcp = FastApiMCP(app)
 mcp.mount()
 
