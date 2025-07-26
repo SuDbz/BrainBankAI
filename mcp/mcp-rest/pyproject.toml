@@ -1,0 +1,11 @@
+[project]
+name = "rest-server"
+version = "0.1.0"
+description = "A REST server that returns current time for given locations"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.116.1",
+    "pytz>=2023.3",
+    "uvicorn>=0.24.0"
+]

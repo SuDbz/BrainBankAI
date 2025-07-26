@@ -33,6 +33,12 @@
     - [MCP Server with python + VS](https://www.youtube.com/watch?v=iS25RFups4A)
     - [MCP Server + Rest + python + VS](https://www.youtube.com/watch?v=2hwrxAbw-9Y)
 
+ - Code 
+    - [Rest MCP](/mcp/mcp-rest/)
+        - [Fast API and Fast MCP API](/mcp/mcp-rest/fast_api_fast_mcp_and_uv.md)
+        - [About the Rest App](/mcp/mcp-rest/instructions.md)
+
+
 ## Introduction
 
 The Model Context Protocol (MCP) is primarily defined as a **protocol**, acting as a **standard** for engineers to develop systems that can communicate with each other effectively. It is officially known as the **Model Context Protocol** and was originally introduced by Anthropic (the company behind Claude). Since its inception, it has become an **open-source standard for building AI agents**.
