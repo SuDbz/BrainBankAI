@@ -24,6 +24,7 @@
     - [Challenges and Limitations](#challenges-and-limitations)
     - [Future Vision and Opportunities](#future-vision-and-opportunities)
 - [Other Links](#other-links)    
+    - [Build ANYTHING With an Advanced MCP Server (Python, Authentication, Databases & More)](https://www.youtube.com/watch?v=j5f2EQf5hkw)    
     - [mcp-overview](https://github.com/microsoft/mcp-for-beginners?tab=readme-ov-file#-mcp-curriculum-overview)
     - [quick-mcp-example](https://github.com/ALucek/quick-mcp-example)
     - [mcp-with-python](https://www.youtube.com/watch?v=N3vHJcHBS-w)

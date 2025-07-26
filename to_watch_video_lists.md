@@ -12,6 +12,7 @@
 
 
 ## MCP 
+- [Build ANYTHING With an Advanced MCP Server (Python, Authentication, Databases & More)](https://www.youtube.com/watch?v=j5f2EQf5hkw)  
 - [java/mcp-server official doc](https://modelcontextprotocol.io/sdk/java/mcp-server#stdio)
 - [The Ultimate MCP Crash Course - Build From Scratch](https://www.youtube.com/watch?v=ZoZxQwp1PiM)
 - [Model Context Protocol (MCP), clearly explained (why it matters)](https://www.youtube.com/watch?v=7j_NE6Pjv-E)
