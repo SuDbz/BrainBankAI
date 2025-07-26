@@ -32,11 +32,14 @@
     - [Writing Your Own MCP Server With Java](https://www.youtube.com/watch?v=aOIO79Z1sUc)
     - [MCP Server with python + VS](https://www.youtube.com/watch?v=iS25RFups4A)
     - [MCP Server + Rest + python + VS](https://www.youtube.com/watch?v=2hwrxAbw-9Y)
-
  - Code 
     - [Rest MCP](/mcp/mcp-rest/)
         - [Fast API and Fast MCP API](/mcp/mcp-rest/fast_api_fast_mcp_and_uv.md)
         - [About the Rest App](/mcp/mcp-rest/instructions.md)
+    - [Stdio MCP](/mcp/mcp-stdio/)
+        - [Server](/mcp/mcp-stdio/server/)
+        - [Client](/mcp/mcp-stdio/client/)
+
 
 
 ## Introduction
