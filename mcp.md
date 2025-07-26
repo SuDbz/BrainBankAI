@@ -27,6 +27,9 @@
     - [mcp-overview](https://github.com/microsoft/mcp-for-beginners?tab=readme-ov-file#-mcp-curriculum-overview)
     - [quick-mcp-example](https://github.com/ALucek/quick-mcp-example)
     - [mcp-with-python](https://www.youtube.com/watch?v=N3vHJcHBS-w)
+    - [Learn how to build an MCP Server in Java](https://www.youtube.com/watch?v=Y_Rk6QgWUbE)
+    - [Build Your Own MCP Server in Under 15 Minutes | Spring AI Tutorial](https://www.youtube.com/watch?v=w5YVHG1j3Co)
+    - [Writing Your Own MCP Server With Java](https://www.youtube.com/watch?v=aOIO79Z1sUc)
 
 ## Introduction
 
