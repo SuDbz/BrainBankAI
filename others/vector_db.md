@@ -1,6 +1,7 @@
 # Vector Databases: A Practical Guide
 
 
+
 ## Table of Contents
 1. [What is a Vector Database?](#what-is-a-vector-database)
 2. [When to Use a Vector Database](#when-to-use-a-vector-database)
@@ -18,10 +19,15 @@
     - [Use Cases](#use-cases)
     - [Examples of Vector Databases and Libraries](#examples-of-vector-databases-and-libraries)
     - [Vector Indexing and Search Algorithms](#vector-indexing-and-search-algorithms)
-9. [Building a Plain Vector Database (No LLM)](#building-a-plain-vector-database-no-llm)
-10. [How to Interact with a Vector Database Using Python](#how-to-interact-with-a-vector-database-using-python)
-11. [ChromaDB, OpenAI, and Ollama](#chromadb-openai-and-ollama)
-12. [References](#references)
+9. [CLIP, GloVe, and Word2Vec Embedding Models](#clip-glove-and-word2vec-embedding-models)
+    - [CLIP (Image/Text Embeddings)](#clip-imagetext-embeddings)
+    - [GloVe (Text Embeddings)](#glove-text-embeddings)
+    - [Word2Vec (Text Embeddings)](#word2vec-text-embeddings)
+    - [Audio to Vector](#audio-to-vector)
+10. [Building a Plain Vector Database (No LLM)](#building-a-plain-vector-database-no-llm)
+11. [How to Interact with a Vector Database Using Python](#how-to-interact-with-a-vector-database-using-python)
+12. [ChromaDB, OpenAI, and Ollama](#chromadb-openai-and-ollama)
+13. [References](#references)
 
 ---
 
@@ -297,6 +303,102 @@ print("Most similar item:", results['documents'])
 - No LLM or external API is used; vectors are created manually or from numeric features.
 - This approach is useful for similarity search in numeric datasets, image features, sensor data, etc.
 - You can use any method to generate vectors, as long as they are lists of numbers.
+
+---
+
+
+## CLIP, GloVe, and Word2Vec Embedding Models
+
+### CLIP (Image/Text Embeddings)
+CLIP (Contrastive Language–Image Pre-training) is a model by OpenAI that can embed both images and text into the same vector space, enabling cross-modal search and retrieval.
+
+#### Example: CLIP Usage in Python
+```python
+# Install: pip install torch torchvision clip-by-openai
+import clip
+import torch
+from PIL import Image
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model, preprocess = clip.load("ViT-B/32", device=device)
+
+# Prepare image and text
+image = preprocess(Image.open("cat.jpg")).unsqueeze(0).to(device)
+text = clip.tokenize(["a photo of a cat", "a photo of a dog"]).to(device)
+
+# Get embeddings
+with torch.no_grad():
+    image_features = model.encode_image(image)
+    text_features = model.encode_text(text)
+
+# Compare similarity
+similarity = (image_features @ text_features.T).softmax(dim=-1)
+print("Similarity scores:", similarity)
+```
+
+### GloVe (Text Embeddings)
+GloVe (Global Vectors for Word Representation) is a popular unsupervised learning algorithm for obtaining vector representations for words.
+
+#### Example: GloVe Usage in Python
+```python
+# Download GloVe vectors from https://nlp.stanford.edu/projects/glove/
+import numpy as np
+
+# Load GloVe vectors (example for glove.6B.50d.txt)
+glove_path = "glove.6B.50d.txt"
+glove = {}
+with open(glove_path, "r", encoding="utf8") as f:
+    for line in f:
+        parts = line.split()
+        word = parts[0]
+        vector = np.array(parts[1:], dtype=np.float32)
+        glove[word] = vector
+
+# Get embedding for a word
+embedding = glove["cat"]
+print("GloVe embedding for 'cat':", embedding)
+```
+
+### Word2Vec (Text Embeddings)
+Word2Vec is a neural network-based technique to learn word associations from a large corpus of text. It produces word embeddings that capture semantic relationships.
+
+#### Example: Word2Vec Usage in Python
+```python
+# Install: pip install gensim
+from gensim.models import Word2Vec
+
+# Train Word2Vec on sample sentences
+sentences = [["cat", "sat", "on", "the", "mat"], ["dog", "barked"]]
+model = Word2Vec(sentences, vector_size=50, window=5, min_count=1, workers=2)
+
+# Get embedding for a word
+embedding = model.wv["cat"]
+print("Word2Vec embedding for 'cat':", embedding)
+```
+
+### Audio to Vector
+To convert audio to vectors, you typically extract features (MFCCs, spectrograms, etc.) using libraries like librosa, then use those features as embeddings.
+
+#### Example: Audio Feature Extraction in Python
+```python
+# Install: pip install librosa
+import librosa
+
+# Load audio file
+audio_path = "audio_sample.wav"
+y, sr = librosa.load(audio_path)
+
+# Extract MFCC features
+mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+mfcc_mean = mfcc.mean(axis=1)
+print("Audio vector (MFCC mean):", mfcc_mean)
+```
+
+**Comments:**
+- CLIP is used for cross-modal (image/text) search and retrieval.
+- GloVe and Word2Vec are used for text embeddings and NLP tasks.
+- Audio features (MFCCs) can be used for similarity search in audio databases.
+- All these embeddings can be stored and queried in a vector database like ChromaDB.
 
 ---
 
