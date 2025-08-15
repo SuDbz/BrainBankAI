@@ -157,4 +157,3 @@ Prompting is the art of instructing LLMs to get the desired output. Good prompts
 
 ---
 
-*This page provides a practical overview of the most popular LLMs, their capabilities, and how to use them effectively for a wide range of tasks.*
