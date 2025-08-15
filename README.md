@@ -12,6 +12,12 @@
   
   Software applications and utilities that leverage artificial intelligence to automate tasks, analyze data, and enhance productivity.
 
+- [Vector DB](vector_db.md)
+  
+  A vector database is a specialized database designed to store, index, and search high-dimensional vectors (numerical arrays). These vectors typically represent
+  data such as text, images, audio, or video after being transformed by machine learning models (embeddings). Vector databases enable efficient similarity search,
+  which is crucial for AI, recommendation systems, and semantic search.
+
 - [GitHub Copilot](https://github.com/github/awesome-copilot/blob/main/README.md) 
 
   Enhance your GitHub Copilot experience with community-contributed instructions, prompts, and configurations. Get consistent AI assistance that follows your team's coding standards and project requirements.
@@ -20,3 +26,4 @@
 - [AI related videos](to_watch_video_lists.md)
   
   Educational and informational video content covering AI concepts, tutorials, demonstrations, and industry developments.
+
