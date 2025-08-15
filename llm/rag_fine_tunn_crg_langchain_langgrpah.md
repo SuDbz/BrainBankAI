@@ -21,23 +21,47 @@
 RAG combines retrieval of external knowledge (from databases, documents, etc.) with generative models (LLMs) to answer queries with up-to-date, context-rich information. It is widely used for chatbots, search, and Q&A systems.
 
 ### Python Example: RAG with Ollama and OpenAI
+docs = ["Python is a programming language.", "Ollama runs LLMs locally."]
 ```python
 import requests
 import openai
+import numpy as np
 
 openai.api_key = "YOUR_OPENAI_API_KEY"
 
-# Step 1: Retrieve relevant context (simulate with a local list)
+# Step 1: Prepare documents and query
 docs = ["Python is a programming language.", "Ollama runs LLMs locally."]
 query = "What is Ollama?"
 
-# Use OpenAI embedding to find the most relevant doc
-response = openai.Embedding.create(input=query, model="text-embedding-ada-002")
-query_emb = response['data'][0]['embedding']
-# ...compare with doc embeddings (not shown for brevity)...
-context = docs[1]  # Assume docs[1] is most relevant
 
-# Step 2: Generate answer using Ollama (local LLM)
+
+# Step 2: Get embeddings for query and documents
+# We use OpenAI's embedding model to convert the user's query into a high-dimensional vector.
+# For the documents, embeddings should be created once (when the documents are added to your system) and cached/stored for reuse.
+# This avoids recomputing document embeddings for every query, making retrieval fast and efficient.
+query_emb = openai.Embedding.create(input=query, model="text-embedding-ada-002")['data'][0]['embedding']
+# In a real system, you would load precomputed doc_embeddings from storage:
+# doc_embeddings = load_cached_doc_embeddings()
+# For demonstration, we compute them here, but this is NOT recommended for production:
+doc_embeddings = [openai.Embedding.create(input=doc, model="text-embedding-ada-002")['data'][0]['embedding'] for doc in docs]
+
+# Step 3: Compare query embedding with document embeddings using cosine similarity
+# Why? Cosine similarity measures how close two vectors are in direction, which reflects how similar their meanings are.
+# We want to find which document is most semantically similar to the user's query.
+def cosine_similarity(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+# Calculate similarity scores for each document
+similarities = [cosine_similarity(query_emb, doc_emb) for doc_emb in doc_embeddings]
+# Find the index of the document with the highest similarity score
+best_idx = np.argmax(similarities)
+# Select the most relevant document as context for the LLM
+context = docs[best_idx]  # The most relevant doc based on similarity
+# This process ensures the context is the most semantically similar to the query, improving the LLM's answer quality.
+
+# Step 4: Generate answer using Ollama (local LLM)
 ollama_response = requests.post(
     "http://localhost:11434/api/generate",
     json={"model": "llama2", "prompt": f"Context: {context}\nQuestion: {query}"}
