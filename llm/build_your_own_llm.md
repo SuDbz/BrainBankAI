@@ -261,4 +261,3 @@ print("Model response:", response)
 
 ---
 
-Feel free to copy, adapt, and extend this document for your learning journey!
