@@ -68,9 +68,13 @@ You can run these models locally using [Ollama](https://ollama.com/) or HuggingF
 ---
 
 ## Setting Up Your Python Environment
+
 ```bash
 # Install Python packages
-pip install torch transformers datasets ollama
+pip install torch        # PyTorch: Deep learning framework for model training and inference
+pip install transformers # HuggingFace Transformers: Provides pre-trained models and utilities
+pip install datasets     # HuggingFace Datasets: Tools for working with ML datasets
+pip install ollama       # Ollama Python client: Interface with locally running LLMs
 ```
 
 ---
@@ -84,6 +88,15 @@ Prepare a text dataset (e.g., plain text, JSONL). For custom tasks, use domain-s
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments, TextDataset
 
 # Load tokenizer and model
+# Loading the model and tokenizer for language generation:
+# - `AutoModelForCausalLM`: A class from the Hugging Face transformers library that automatically loads 
+#     the appropriate language model architecture based on the provided model name.
+#     It's designed for causal language modeling (next token prediction) like GPT models.
+# - `AutoTokenizer`: A class from the transformers library that handles text preprocessing, 
+#     converting raw text into numerical tokens that the model can understand.
+#     It also handles special tokens, vocabulary, and text normalization.
+# - `gpt2`: A pre-trained language model developed by OpenAI that can generate coherent text.
+
 model_name = "gpt2"  # The base model to start with (can be replaced with any open-source LLM)
 model = AutoModelForCausalLM.from_pretrained(model_name)  # Loads the model architecture and weights
 tokenizer = AutoTokenizer.from_pretrained(model_name)  # Loads the tokenizer for splitting text into tokens
@@ -218,6 +231,22 @@ Once you have trained or fine-tuned your LLM, you can run it and validate its ou
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # Load your trained or fine-tuned model
+
+# This code loads a trained causal language model from the "./results" directory into memory. 
+# The `AutoModelForCausalLM.from_pretrained()` function:
+# 1. Automatically detects the model architecture from the saved configuration
+# 2. Loads the trained model weights and parameters
+# 3. Initializes the model in evaluation mode
+
+# The "./results" directory typically contains:
+# - model_config.json: Configuration file with model architecture details
+# - pytorch_model.bin: The trained model weights
+# - tokenizer files (if saved with the model)
+# - training_args.json: Arguments used during training (if saved)
+# 
+# The second line loads the GPT-2 tokenizer, which is necessary for processing text inputs before passing them to the model. Note that 
+# the tokenizer loaded here is the base GPT-2 tokenizer, not a potentially custom tokenizer from the training results.
+
 model = AutoModelForCausalLM.from_pretrained("./results")  # Path to your trained model
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
@@ -226,6 +255,68 @@ inputs = tokenizer(prompt, return_tensors="pt")
 outputs = model.generate(**inputs, max_length=50)
 response = tokenizer.decode(outputs[0])
 print("Model response:", response)
+
+```
+
+Alternative: Using Ollama for local LLM inference
+
+```python
+# This approach lets you run models locally with less code
+
+import ollama
+
+# Run inference using your local Ollama instance
+# To use your own custom trained model with Ollama:
+# 1. First export your trained model from HuggingFace format
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+# Load your trained model
+model = AutoModelForCausalLM.from_pretrained("./results")
+tokenizer = AutoTokenizer.from_pretrained("./results")
+
+# Export to GGUF format (requires gguf conversion tools)
+# This is a simplified representation - actual conversion requires additional steps
+# See: https://github.com/ggerganov/ggml/tree/master/examples/gguf
+
+# 2. Create an Ollama model file (Modelfile)
+"""
+# This points to your model in GGUF format
+# GGUF (GPT-Generated Unified Format) is a binary format for efficient model storage
+# Note: This file won't be automatically created in ./results - you need to convert 
+# your model from PyTorch format to GGUF format using conversion tools like 
+# llama.cpp's converter
+FROM ./your-exported-model.gguf
+
+
+# Controls randomness in output generation
+# Lower values (e.g., 0.2) make responses more deterministic and focused
+# Higher values (e.g., 0.8) make responses more creative and diverse
+PARAMETER temperature 0.7
+
+
+
+# Nucleus sampling parameter - controls token selection diversity
+# The model will only consider tokens whose cumulative probability exceeds this value
+# Lower values create more focused/predictable responses
+# Higher values allow more variety in word choice
+PARAMETER top_p 0.9
+
+
+# Defines a sequence that stops text generation when encountered
+# Useful for chat interfaces to prevent the model from generating the next user prompt
+PARAMETER stop "User:"
+"""
+
+# 3. Create and use your model in Ollama
+# In terminal: ollama create mymodel -f Modelfile
+# Then in Python:
+custom_response = ollama.chat(model='mymodel', messages=[
+    {
+        'role': 'user',
+        'content': 'Explain the difference between AI and ML.'
+    }
+])
+print("Custom model response:", custom_response['message']['content'])
 ```
 
 ### How to Validate Output
@@ -260,4 +351,3 @@ print("Model response:", response)
 - [Ollama Docs](https://ollama.com/docs)
 
 ---
-
