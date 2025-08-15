@@ -6,7 +6,11 @@
 
   - [RAG vs CAG vs LangGraph vs LangChain ](llm/rag_fine_tunn_crg_langchain_langgrpah.md)
 
-     Advanced LLM Concepts: RAG, CAG, Fine-Tuning, Prompt Engineering, LangGraph, and LangChain  
+     Advanced LLM Concepts: RAG, CAG, Fine-Tuning, Prompt Engineering, LangGraph, and LangChain
+    
+  - [Build your own LLM](llm/build_your_own_llm.md)
+ 
+     A beginner-friendly guide to building your own Large Language Model (LLM) using Python, covering concepts, training, fine-tuning, RAG, CAG, and prompt engineering. It includes practical code examples, explanations, and resources for hands-on learning.
 
 
 
