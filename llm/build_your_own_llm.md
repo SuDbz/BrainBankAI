@@ -1,5 +1,6 @@
 # Build Your Own LLM: A Beginner's Guide
 
+
 ## Table of Contents
 1. [Introduction to LLMs](#introduction-to-llms)
 2. [Core Concepts of LLMs](#core-concepts-of-llms)
@@ -18,11 +19,20 @@
 6. [Fine-Tuning an LLM](#fine-tuning-an-llm)
     - [Fine-Tuning Example](#fine-tuning-example)
 7. [Implementing RAG and CAG](#implementing-rag-and-cag)
-    - [RAG Example](#rag-example)
+    - [RAG Example (Simple)](#rag-example-simple)
+    - [RAG with Vector Database (Recommended Workflow)](#rag-with-vector-database-recommended-workflow)
+        - [Step 1: Create and Store Document Embeddings in a Vector DB](#step-1-create-and-store-document-embeddings-in-a-vector-db)
+        - [Step 2: Query the Vector DB for Relevant Context](#step-2-query-the-vector-db-for-relevant-context)
+        - [Step 3: Pass Context to LLM for Generation](#step-3-pass-context-to-llm-for-generation)
     - [CAG Example](#cag-example)
 8. [Prompt Engineering Tips](#prompt-engineering-tips)
-9. [Useful Libraries and Tools](#useful-libraries-and-tools)
-10. [References](#references)
+9. [Running and Validating Your Trained LLM](#running-and-validating-your-trained-llm)
+    - [Example: Running the Model](#example-running-the-model)
+    - [Alternative: Using Ollama for local LLM inference](#alternative-using-ollama-for-local-llm-inference)
+    - [How to Validate Output](#how-to-validate-output)
+    - [How to Improve Model Responses](#how-to-improve-model-responses)
+10. [Useful Libraries and Tools](#useful-libraries-and-tools)
+11. [References](#references)
 
 ---
 
@@ -167,7 +177,8 @@ trainer.train()  # Starts fine-tuning
 ---
 
 ## Implementing RAG and CAG
-### RAG Example
+
+### RAG Example (Simple)
 ```python
 import requests
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -191,6 +202,64 @@ outputs = model.generate(**inputs, max_length=50)
 answer = tokenizer.decode(outputs[0])  # Convert model output tokens back to text
 print(answer)
 ```
+
+### RAG with Vector Database (Recommended Workflow)
+
+#### Step 1: Create and Store Document Embeddings in a Vector DB
+```python
+import chromadb
+import openai
+
+openai.api_key = "YOUR_OPENAI_API_KEY"
+
+# Example documents
+docs = ["Python is a programming language.", "Ollama runs LLMs locally."]
+
+# Create ChromaDB collection
+client = chromadb.Client()
+collection = client.create_collection(name="knowledge_base")
+
+# Compute and store embeddings for each document (one-time operation)
+for doc in docs:
+    embedding = openai.Embedding.create(input=doc, model="text-embedding-ada-002")['data'][0]['embedding']
+    collection.add(documents=[doc], embeddings=[embedding])
+```
+
+#### Step 2: Query the Vector DB for Relevant Context
+```python
+import numpy as np
+
+query = "What is Ollama?"
+# Tokenize and embed the query
+query_embedding = openai.Embedding.create(input=query, model="text-embedding-ada-002")['data'][0]['embedding']
+
+# Search for the most similar document in the vector DB
+results = collection.query(query_embeddings=[query_embedding], n_results=1)
+context = results['documents'][0]  # Most relevant context from DB
+```
+
+#### Step 3: Pass Context to LLM for Generation
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+prompt = f"Context: {context}\nQuestion: {query}"
+model = AutoModelForCausalLM.from_pretrained("gpt2")
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
+inputs = tokenizer(prompt, return_tensors="pt")
+outputs = model.generate(**inputs, max_length=50)
+answer = tokenizer.decode(outputs[0])
+print(answer)
+```
+
+---
+
+**Summary:**
+- Document embeddings are created and stored in a vector database once.
+- For each query, only the query is tokenized and embedded, and the vector DB is used to identify the most relevant context.
+- The LLM then uses this context to generate a response.
+
+This workflow is efficient and scalable for real-world RAG systems.
+
 
 ### CAG Example
 ```python
