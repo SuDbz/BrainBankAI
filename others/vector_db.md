@@ -145,6 +145,17 @@ def get_embedding(text):
         raise Exception(f"Error getting embedding: {response.text}")
 
 # Initialize Chroma DB
+#
+# By default, when you create a ChromaDB client without specifying parameters, it uses an in-memory database. This means:
+# The database exists only in RAM
+# All data will be lost when your program terminates
+# No files are created on disk
+#
+#
+# If you want to persist the data to disk, you would need to use the PersistentClient instead:
+# from chromadb.config import Settings
+# persistent_client = chromadb.PersistentClient(path="/path/to/save/data", settings=Settings(allow_reset=True))
+
 client = chromadb.Client()
 collection = client.create_collection(name="documents")
 
