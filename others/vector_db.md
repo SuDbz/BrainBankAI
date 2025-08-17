@@ -119,6 +119,59 @@ with open("sample.txt") as f:
 # Note: For audio/video, use a model to transcribe or extract features, then embed.
 ```
 
+Using ollama
+
+```python
+
+import chromadb
+import pandas as pd
+from PyPDF2 import PdfReader
+import requests
+import json
+
+# Function to get embeddings from Ollama
+# Converts text to vector using a local Ollama model
+def get_embedding(text):
+    response = requests.post(
+        "http://localhost:11434/api/embeddings",
+        json={
+            "model": "llama2",  # or another model you have installed in Ollama
+            "prompt": text
+        }
+    )
+    if response.status_code == 200:
+        return response.json()["embedding"]
+    else:
+        raise Exception(f"Error getting embedding: {response.text}")
+
+# Initialize Chroma DB
+client = chromadb.Client()
+collection = client.create_collection(name="documents")
+
+# Index PDF
+pdf = PdfReader("sample.pdf")
+for page in pdf.pages:
+    text = page.extract_text()
+    embedding = get_embedding(text)
+    collection.add(documents=[text], embeddings=[embedding])
+
+# Index CSV
+# Replace 'text_column' with your actual column name
+df = pd.read_csv("sample.csv")
+for row in df['text_column']:
+    embedding = get_embedding(row)
+    collection.add(documents=[row], embeddings=[embedding])
+
+# Index plain text docs
+with open("sample.txt") as f:
+    text = f.read()
+    embedding = get_embedding(text)
+    collection.add(documents=[text], embeddings=[embedding])
+
+# Note: For audio/video, use a model to transcribe or extract features, then embed.
+
+```
+
 ---
 ## Embeddings and Indexes in Vector DB
 
