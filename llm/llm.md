@@ -1,8 +1,4 @@
-You're right. Below is the content in raw Markdown format. Copy everything inside the code block and save it as `LLM_Learning_Roadmap.md`.
 
-markdown
-
-````
 # Complete LLM Learning Roadmap: Zero to Building Your Own LLM
 
 ## Goal
@@ -1455,8 +1451,3 @@ Distinguish between three different goals:
 Start with small models that you can understand completely. Increase the model size and complexity as your programming, mathematical, and hardware skills improve.
 
 First milestone: Complete Python fundamentals, implement a neural network in NumPy, and then implement the same network in PyTorch. Next, learn tokenization and build a tiny GPT-style model.
-
-```
-
-Save the file as **`LLM_Learning_Roadmap.md`**. The `.md` extension makes it a Markdown file that you can preview in VS Code, GitHub, or Obsidian.
-```
